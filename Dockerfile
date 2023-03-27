@@ -9,6 +9,9 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
+#Install cron  
+RUN apt-get update && apt-get install -y cron 
+
 # Adding crontab to the appropriate location
 RUN echo '0 */6 * * * cd /app & python3 main.py' > /etc/cron.d/run-crawler
 
