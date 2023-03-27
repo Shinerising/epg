@@ -10,6 +10,6 @@ RUN pip3 install -r requirements.txt
 COPY . .
 
 # Add the cron job
-RUN echo '0 0 *  *  * python3 /app/main.py' > /etc/crontabs/root
+RUN echo '0 */6 * * * python3 /app/main.py' > /etc/crontabs/root
 
 CMD [ "python3", "manage.py", " runserver", "0.0.0.0:8080"]
