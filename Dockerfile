@@ -9,7 +9,13 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-# Add the cron job
-RUN echo '0 */6 * * * python3 /app/main.py' > /etc/crontabs/root
+# Adding crontab to the appropriate location
+RUN echo '0 */6 * * * cd /app & python3 main.py' > /etc/cron.d/run-crawler
 
-CMD [ "python3", "manage.py", " runserver", "0.0.0.0:8080"]
+# Giving executable permission to crontab file
+RUN chmod 0644 /etc/cron.d/run-crawler
+
+# Running crontab
+RUN crontab /etc/cron.d/run-crawler
+
+CMD [ "python3", "manage.py", "runserver", "0.0.0.0:8080"]
