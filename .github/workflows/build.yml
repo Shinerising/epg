@@ -1,4 +1,4 @@
-name: ASP.NET Build
+name: Build Image
 
 on:
   push:
